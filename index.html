@@ -31,21 +31,36 @@
 
     var playerPlay = function() {
       var playerChoice = getPlayerResponse("Please choose Rock, Paper, or Scissors.");
-
       return playerChoice;
     }
 
     var playRound = function(playerSelection, computerSelection) {
       var results = "";
       console.log(playerSelection + " Vs. " + computerSelection);
+      if (playerSelection === computerSelection) {
+        console.log("Tie");
+      } else if ((playerSelection === "Rock") && (computerSelection !== "Paper")) {
+        console.log("You win!");
+      } else if ((playerSelection === "Paper") && (computerSelection !== "Scissors")) {
+        console.log("You win!");
+      } else if ((playerSelection === "Scissors") && (computerSelection !== "Rock")) {
+        console.log("You win!");
+      } else {
+        console.log("You lost");
+      }
     }
+
 
     playRound(playerPlay(), computerPlay());
   </script>
-  <p>
-    Please open the Web console to play along.
-  </p>
-  <code>ctrl + shift + k for firefox</code>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-3">Please open the Web console to play along.</h1>
+      <p class="lead"></p>
+      <code class="keyBoardShortCut">ctrl + shift + k for Firefox</code>
+    </div>
+    <button type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
+  </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
