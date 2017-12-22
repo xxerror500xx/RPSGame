@@ -8,8 +8,54 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
 
-<body>
+<body onload="getBrowser()">
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-3">Please open the Web console to play along.</h1>
+      <p id="browser"></p>
+      <code id="keyBoardShortCut"></code>
+    </div>
+    <button class="btn btn-block btn-primary" type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
+  </div>
   <script type="text/javascript">
+    var getBrowser = function() {
+      // modified from https://jsfiddle.net/311aLtkz/
+      // Firefox 1.0+
+      var firefox = typeof InstallTrigger !== 'undefined';
+      var chrome = !!window.chrome && !!window.chrome.webstore;
+      // Safari 3.0+ "[object HTMLElementConstructor]"
+      var safari = /constructor/i.test(window.HTMLElement) || (function(p) {
+        return p.toString() === "[object SafariRemoteNotification]";
+      })(!window['safari'] || safari.pushNotification);
+      // Opera 8.0+
+      var opera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+      // Internet Explorer 6-11
+      var iE = /*@cc_on!@*/ false || !!document.documentMode;
+
+      var output = 'Browser detected via ducktyping:';
+      if (firefox) {
+        output += ' Firefox detected!'
+        document.getElementById('keyBoardShortCut').innerHTML = "Press Ctrl + Shift + K (Win / Linux) or Cmd + Opt + K (Mac).";
+      } else if (chrome) {
+        output += ' Chrome detected!'
+        document.getElementById('keyBoardShortCut').innerHTML = "Press Ctrl + Shift + J (Win / Linux) or Cmd + Opt + J (Mac). <br> Then choose the Console from the tabs.";
+      }else if (safari) {
+        output += ' Safari detected!'
+        document.getElementById('keyBoardShortCut').innerHTML = "Press Opt + Cmd + i (Mac)";
+      }else if (opera) {
+        output += ' Opera detected!'
+        document.getElementById('keyBoardShortCut').innerHTML = "ctrl + shift + k";
+      }else if (iE) {
+        output += ' IE detected! ... ... Hmm...'
+        document.getElementById('keyBoardShortCut').innerHTML = "Press F12";
+      } else {
+        output += ' Hmmm... I have no Idea what browser you are using. <br>  Sorry might need to google how to open the console or if this browser has a console. GL'
+        document.getElementById('keyBoardShortCut').innerHTML = "!0_o!";
+      }
+      console.log(output);
+      document.getElementById('browser').innerHTML = output;
+    }
+
     const weapons = ["rock", "paper", "scissors"];
     const maxRounds = 5;
     var round = 0;
@@ -93,14 +139,6 @@
       stats();
     }
   </script>
-  <div class="container">
-    <div class="jumbotron">
-      <h1 class="display-3">Please open the Web console to play along.</h1>
-      <p class="lead"></p>
-      <code class="keyBoardShortCut">ctrl + shift + k for Firefox</code>
-    </div>
-    <button class="btn btn-block btn-primary" type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
-  </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
