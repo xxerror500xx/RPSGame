@@ -108,7 +108,7 @@
     }
 
     var playRound = function(playerSelection, computerSelection) {
-      console.log("in playRound()");
+      //console.log("in playRound()");
       var results = "";
       if (playerSelection === computerSelection) {
         console.log(playerSelection + " Vs. " + computerSelection);
@@ -146,14 +146,16 @@
         playRound(playerPlay(), computerPlay());
       } else if (round === maxRounds) {
         console.log("ready for another Game I see! Let's do this!!!");
+        gameNum++;
         if (playerScore > computerScore) {
           gameWin++;
           alert("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!")
+        }else {
+          alert("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " times!")
         }
         playerScore = 0;
         computerScore = 0;
         round = 0;
-        gameNum++;
         playRound(playerPlay(), computerPlay());
       } else {
         console.log("New round");
