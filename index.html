@@ -10,48 +10,81 @@
 
 <body>
   <script type="text/javascript">
-    const weapons = ["Rock", "Paper", "Scissors"];
+    const weapons = ["rock", "paper", "scissors"];
+    const maxRounds = 5;
+    var round = 0;
+    var gameNum = 0;
+    var playerScore = 0;
+    var computerScore = 0;
+    var stats = function() {
+      console.log("in stats()");
+      console.log("Score: " + playerScore + " to: " + computerScore);
+      console.log("G: " + gameNum + " R: " + round + "/" + maxRounds);
+    }
     var computerPlay = function() {
+      console.log("in computerPlay()");
       var weapon = weapons[Math.floor(Math.random() * weapons.length)]
+      weapon = weapon.toLowerCase();
+      weapon = weapon.charAt(0).toUpperCase() + weapon.slice(1); // converts the first letter to Uppercase
       return weapon;
     }
     var getPlayerResponse = function(msg) {
+      console.log("in getplayerResponse()");
       console.log(msg);
-      var response = prompt(msg);
-      response = response.toLowerCase();
-      response = response.charAt(0).toUpperCase() + response.slice(1); // converts the first letter to Uppercase
-      if (response != null && response != undefined && response != "" && weapons.includes(response)) {
+      var response = "";
+      response = prompt(msg);
+      if (response === "") {
+        console.log("That was not a proper input. C'mon!");
+        getPlayerResponse("Let's try again, Please choose Rock, Paper, or Scissors.");
+        response = prompt(msg);
+      } else if (response === null) {
+        console.log("Dont feel like playing eh?");
+        return null;
+      } else if (weapons.includes(response.toLowerCase())) {
+        response = response.toLowerCase();
+        response = response.charAt(0).toUpperCase() + response.slice(1); // converts the first letter to Uppercase
         console.log("You chose " + response + "!")
         return response;
-      } else {
-        console.log(response + " is not appropriate for this game.");
-        getPlayerResponse("Let's try again, Please choose Rock, Paper, or Scissors.");
       }
     }
 
     var playerPlay = function() {
+      console.log("in playerPlay()");
       var playerChoice = getPlayerResponse("Please choose Rock, Paper, or Scissors.");
       return playerChoice;
     }
 
     var playRound = function(playerSelection, computerSelection) {
+      console.log("in playRound()");
       var results = "";
-      console.log(playerSelection + " Vs. " + computerSelection);
       if (playerSelection === computerSelection) {
-        console.log("Tie");
+        console.log(playerSelection + " Vs. " + computerSelection);
+        console.log("Tie - Replay that round");
       } else if ((playerSelection === "Rock") && (computerSelection !== "Paper")) {
+        console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
+        playerScore++;
+        round++;
       } else if ((playerSelection === "Paper") && (computerSelection !== "Scissors")) {
+        console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
+        playerScore++;
+        round++;
       } else if ((playerSelection === "Scissors") && (computerSelection !== "Rock")) {
+        console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
+        playerScore++;
+        round++;
+      } else if (playerSelection === null) {
+        console.log("come back and play again real soon!");
       } else {
+        console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You lost");
+        computerScore++;
+        round++;
       }
+      stats();
     }
-
-
-    playRound(playerPlay(), computerPlay());
   </script>
   <div class="container">
     <div class="jumbotron">
