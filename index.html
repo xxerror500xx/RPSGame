@@ -35,8 +35,13 @@
       response = prompt(msg);
       if (response === "") {
         console.log("That was not a proper input. C'mon!");
-        getPlayerResponse("Let's try again, Please choose Rock, Paper, or Scissors.");
+        msg = "Let's try again, Please choose Rock, Paper, or Scissors.";
         response = prompt(msg);
+        if (response === "") {
+          msg = "Seriously? Please choose Rock, Paper, or Scissors.";
+          getPlayerResponse(msg);
+        }
+        return response;
       } else if (response === null) {
         console.log("Dont feel like playing eh?");
         return null;
@@ -77,6 +82,8 @@
         round++;
       } else if (playerSelection === null) {
         console.log("come back and play again real soon!");
+      } else if (playerSelection === "") {
+        console.log("SMH!!!! You failed to understand this game at this time!");
       } else {
         console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You lost");
@@ -92,7 +99,7 @@
       <p class="lead"></p>
       <code class="keyBoardShortCut">ctrl + shift + k for Firefox</code>
     </div>
-    <button type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
+    <button class="btn btn-block btn-primary" type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
