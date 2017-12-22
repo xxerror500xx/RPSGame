@@ -98,6 +98,9 @@
         response = response.charAt(0).toUpperCase() + response.slice(1); // converts the first letter to Uppercase
         console.log("You chose " + response + "!")
         return response;
+      } else {
+        alert("SUMONE SET US UP THE BOMB!!!! ALLYOURBASEAREBELONGTOUS!!!");
+        console.log("REALLY!!! Please choose Rock, Paper, or Scissors. Singular, no extra chars no extra words.... UGH!! You lose!");
       }
     }
 
@@ -158,7 +161,7 @@
         round = 0;
         playRound(playerPlay(), computerPlay());
       } else {
-        console.log("New round");
+        console.log("New round!");
         playRound(playerPlay(), computerPlay());
       }
     }
