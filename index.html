@@ -15,7 +15,7 @@
       <p id="browser"></p>
       <code id="keyBoardShortCut"></code>
     </div>
-    <button class="btn btn-block btn-primary" type="button" name="button" onclick="playRound(playerPlay(), computerPlay());">Play</button>
+    <button class="btn btn-block btn-primary" type="button" name="button" onclick="playGame();">Play</button>
   </div>
   <script type="text/javascript">
     var getBrowser = function() {
@@ -39,13 +39,13 @@
       } else if (chrome) {
         output += ' Chrome detected!'
         document.getElementById('keyBoardShortCut').innerHTML = "Press Ctrl + Shift + J (Win / Linux) or Cmd + Opt + J (Mac). <br> Then choose the Console from the tabs.";
-      }else if (safari) {
+      } else if (safari) {
         output += ' Safari detected!'
         document.getElementById('keyBoardShortCut').innerHTML = "Press Opt + Cmd + i (Mac)";
-      }else if (opera) {
+      } else if (opera) {
         output += ' Opera detected!'
         document.getElementById('keyBoardShortCut').innerHTML = "ctrl + shift + k";
-      }else if (iE) {
+      } else if (iE) {
         output += ' IE detected! ... ... Hmm...'
         document.getElementById('keyBoardShortCut').innerHTML = "Press F12";
       } else {
@@ -62,6 +62,7 @@
     var gameNum = 0;
     var playerScore = 0;
     var computerScore = 0;
+
     var stats = function() {
       console.log("in stats()");
       console.log("Score: " + playerScore + " to: " + computerScore);
@@ -137,6 +138,20 @@
         round++;
       }
       stats();
+    }
+    var playGame = function() {
+      if (gameNum === 0 && round === 0) {
+        console.log("Welcome to your first game of RPS! GLHF!");
+        playRound(playerPlay(), computerPlay());
+      }else if (round === maxRounds) {
+        console.log("ready for another Game I see! Let's do this!!!");
+        round = 0;
+        gameNum++;
+        playRound(playerPlay(), computerPlay());
+      }else {
+        console.log("New round");
+        playRound(playerPlay(), computerPlay());
+      }
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
