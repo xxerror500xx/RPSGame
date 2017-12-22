@@ -106,10 +106,10 @@
         response = prompt(msg);
         if (response === "") {
           msg = "Seriously? Please choose Rock, Paper, or Scissors.";
-          getPlayerResponse(msg);
+          response = prompt(msg);
         }
-        return response;
-      } else if (response === null) {
+      }
+      if (response === null) {
         console.log("Dont feel like playing eh?");
         return null;
       } else if (weapons.includes(response.toLowerCase())) {
