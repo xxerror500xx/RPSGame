@@ -50,7 +50,7 @@
         document.getElementById('keyBoardShortCut').innerHTML = "Press F12";
       } else {
         output += ' Hmmm... I have no Idea what browser you are using. <br>  Sorry might need to google how to open the console or if this browser has a console. GL'
-        document.getElementById('keyBoardShortCut').innerHTML = "!0_o!";
+        document.getElementById('keyBoardShortCut').innerHTML = "!0_o! :( Sorry!";
       }
       console.log(output);
       document.getElementById('browser').innerHTML = output;
@@ -60,23 +60,24 @@
     const maxRounds = 5;
     var round = 0;
     var gameNum = 0;
+    var gameWin = 0;
     var playerScore = 0;
     var computerScore = 0;
 
     var stats = function() {
-      console.log("in stats()");
+      // console.log("in stats()");
       console.log("Score: " + playerScore + " to: " + computerScore);
-      console.log("G: " + gameNum + " R: " + round + "/" + maxRounds);
+      console.log("Games: " + gameWin + "/" + gameNum + " R: " + round + "/" + maxRounds);
     }
     var computerPlay = function() {
-      console.log("in computerPlay()");
+      // console.log("in computerPlay()");
       var weapon = weapons[Math.floor(Math.random() * weapons.length)]
       weapon = weapon.toLowerCase();
       weapon = weapon.charAt(0).toUpperCase() + weapon.slice(1); // converts the first letter to Uppercase
       return weapon;
     }
     var getPlayerResponse = function(msg) {
-      console.log("in getplayerResponse()");
+      // console.log("in getplayerResponse()");
       console.log(msg);
       var response = "";
       response = prompt(msg);
@@ -101,7 +102,7 @@
     }
 
     var playerPlay = function() {
-      console.log("in playerPlay()");
+      // console.log("in playerPlay()");
       var playerChoice = getPlayerResponse("Please choose Rock, Paper, or Scissors.");
       return playerChoice;
     }
@@ -143,12 +144,18 @@
       if (gameNum === 0 && round === 0) {
         console.log("Welcome to your first game of RPS! GLHF!");
         playRound(playerPlay(), computerPlay());
-      }else if (round === maxRounds) {
+      } else if (round === maxRounds) {
         console.log("ready for another Game I see! Let's do this!!!");
+        if (playerScore > computerScore) {
+          gameWin++;
+          alert("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!")
+        }
+        playerScore = 0;
+        computerScore = 0;
         round = 0;
         gameNum++;
         playRound(playerPlay(), computerPlay());
-      }else {
+      } else {
         console.log("New round");
         playRound(playerPlay(), computerPlay());
       }
