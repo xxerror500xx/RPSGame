@@ -84,12 +84,10 @@
     var computerScore = 0;
 
     var stats = function() {
-      // console.log("in stats()");
       console.log("Score: " + playerScore + " to: " + computerScore);
       console.log("Games: " + gameWin + "/" + gameNum + " R: " + round + "/" + maxRounds);
     }
     var computerPlay = function() {
-      // console.log("in computerPlay()");
       var weapon = weapons[Math.floor(Math.random() * weapons.length)]
       weapon = weapon.toLowerCase();
       weapon = weapon.charAt(0).toUpperCase() + weapon.slice(1); // converts the first letter to Uppercase
@@ -98,7 +96,6 @@
     var sanatizeResponse = function(response) {
       // WARNING REGEX GETS MESSY FAST
       response = response.toLowerCase();
-      console.log("sanatizing Response");
       var reg = /([^\s+|\t+|\W+|\_+|\0+|\d+]\w+)/i; // Gets the first non-digit, word, case insensitive and grab all words
       // 1234rock!ROCKSCISSORS
       // !!!rock!
@@ -123,7 +120,6 @@
       } else { // parse using regex and check if there is a match
         console.log("Trying to mess things up I see!");
         var responseArr = response.toLowerCase().split(reg);
-        console.log(responseArr);
         for (var i = 0; i < responseArr.length; i++) {
           if (weapons.includes(responseArr[i])) {
             console.log("Found an answer!");
@@ -135,7 +131,6 @@
       }
     }
     var getPlayerResponse = function(msg) {
-      // console.log("in getplayerResponse()");
       console.log(msg);
       var response = "";
       response = sanatizeResponse(prompt(msg)); // This would be where REGEX woould sanitize for the usual culprits (extra chars / spaces + words)
@@ -146,12 +141,11 @@
       } else if (response === "Bad data") {
         console.log(response);
         alert("SUMONE SET US UP THE BOMB!!!! ALLYOURBASEAREBELONGTOUS!!!");
-        console.log("REALLY!!! Please choose Rock, Paper, or Scissors. Singular, no extra chars / spaces, no extra words.... UGH!! You lose this round!");
+        console.log("REALLY!!! All you had to do was choose Rock, Paper, or Scissors. Singular, no extra chars / spaces, no extra words.... UGH!! :( You lose this round!");
         console.log("You tried to enter " + response);
         console.log("I'm hijacking your response!")
         return "Face"; // Rewrite response for humor
       } else {
-        // response = response.toLowerCase();
         response = response.charAt(0).toUpperCase() + response.slice(1); // converts the first letter to Uppercase
         console.log("You chose " + response + "!")
         return response;
@@ -159,17 +153,15 @@
     }
 
     var playerPlay = function() {
-      // console.log("in playerPlay()");
       var playerChoice = getPlayerResponse("Please choose Rock, Paper, or Scissors.");
       return playerChoice;
     }
 
     var playRound = function(playerSelection, computerSelection) {
-      //console.log("in playRound()");
       var results = "";
       if (playerSelection === computerSelection) {
         console.log(playerSelection + " Vs. " + computerSelection);
-        console.log("Tie - Replay that round");
+        console.log("Tie - Replay that round!");
       } else if ((playerSelection === "Rock") && (computerSelection !== "Paper")) {
         console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
@@ -206,8 +198,10 @@
         gameNum++;
         if (playerScore > computerScore) {
           gameWin++;
+          console.log("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!");
           alert("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!")
         } else {
+          console.log("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " times!");
           alert("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " times!")
         }
         playerScore = 0;
