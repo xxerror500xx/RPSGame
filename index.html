@@ -82,10 +82,11 @@
     var gameWin = 0;
     var playerScore = 0;
     var computerScore = 0;
+    var totalTies = 0;
 
     var stats = function() {
       console.log("----------------------------------------");
-      console.log("Score: " + playerScore + " to: " + computerScore);
+      console.log("Score: " + playerScore + " to: " + computerScore + " Ties: " + totalTies);
       console.log("Games: " + gameWin + "/" + gameNum + " R: " + round + "/" + maxRounds);
       console.log("----------------------------------------");
     }
@@ -162,6 +163,7 @@
         console.log("________________________");
         console.log("Tie - Replay that round!");
         console.log("________________________");
+        totalTies++;
       } else if ((playerSelection === "Rock") && (computerSelection !== "Paper")) {
         console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
@@ -190,7 +192,7 @@
       stats();
     }
     var playGame = function() {
-      if (gameNum === 0 && round === 0) {
+      if (gameNum === 0 && round === 0 && totalTies === 0) {
         console.log("|| Welcome to your first game of RPS! GLHF! ||");
         playRound(playerPlay(), computerPlay());
       } else if (round === maxRounds) {
