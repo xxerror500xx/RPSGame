@@ -84,8 +84,10 @@
     var computerScore = 0;
 
     var stats = function() {
+      console.log("----------------------------------------");
       console.log("Score: " + playerScore + " to: " + computerScore);
       console.log("Games: " + gameWin + "/" + gameNum + " R: " + round + "/" + maxRounds);
+      console.log("----------------------------------------");
     }
     var computerPlay = function() {
       var weapon = weapons[Math.floor(Math.random() * weapons.length)]
@@ -95,19 +97,17 @@
     }
     var sanatizeResponse = function(response) {
       // WARNING REGEX GETS MESSY FAST
-      response = response.toLowerCase();
+      response = response === null ? null : response.toLowerCase();
       var reg = /([^\s+|\t+|\W+|\_+|\0+|\d+]\w+)/i; // Gets the first non-digit, word, case insensitive and grab all words
       // 1234rock!ROCKSCISSORS
       // !!!rock!
       // 1234SCISSORS
       // ))_Paper
       // +=-/\~!@#$%^&^&*()_+=Paper
-
-
-
-      console.log(response);
-
-      if (response === undefined) {
+      if (response === null) {
+        console.log("All done playing for now huh?");
+        return null;
+      } else if (response === undefined) {
         msg = "Seriously? Please choose Rock, Paper, or Scissors.";
         return prompt(msg);
       } else if (response === "") {
@@ -115,7 +115,6 @@
         msg = "Let's try again, Please choose Rock, Paper, or Scissors.";
         return prompt(msg);
       } else if (weapons.includes(response)) { // One Word and its is an actuall weapon
-        console.log("Gj you listened to instructions");
         return response;
       } else { // parse using regex and check if there is a match
         console.log("Trying to mess things up I see!");
@@ -126,7 +125,7 @@
             return responseArr[i];
           }
         }
-        console.log("SOOO bad!!!");
+        console.log("Ergh !!!");
         return "Bad data";
       }
     }
@@ -134,18 +133,17 @@
       console.log(msg);
       var response = "";
       response = sanatizeResponse(prompt(msg)); // This would be where REGEX woould sanitize for the usual culprits (extra chars / spaces + words)
-
       if (response === null) {
-        console.log("Dont feel like playing eh?");
+        console.log(" :( Come back soon!");
         return null;
       } else if (response === "Bad data") {
-        console.log(response);
         alert("SUMONE SET US UP THE BOMB!!!! ALLYOURBASEAREBELONGTOUS!!!");
         console.log("REALLY!!! All you had to do was choose Rock, Paper, or Scissors. Singular, no extra chars / spaces, no extra words.... UGH!! :( You lose this round!");
         console.log("You tried to enter " + response);
         console.log("I'm hijacking your response!")
         return "Face"; // Rewrite response for humor
       } else {
+        console.log(response);
         response = response.charAt(0).toUpperCase() + response.slice(1); // converts the first letter to Uppercase
         console.log("You chose " + response + "!")
         return response;
@@ -161,7 +159,9 @@
       var results = "";
       if (playerSelection === computerSelection) {
         console.log(playerSelection + " Vs. " + computerSelection);
+        console.log("________________________");
         console.log("Tie - Replay that round!");
+        console.log("________________________");
       } else if ((playerSelection === "Rock") && (computerSelection !== "Paper")) {
         console.log(playerSelection + " Vs. " + computerSelection);
         console.log("You win!");
@@ -191,25 +191,30 @@
     }
     var playGame = function() {
       if (gameNum === 0 && round === 0) {
-        console.log("Welcome to your first game of RPS! GLHF!");
+        console.log("|| Welcome to your first game of RPS! GLHF! ||");
         playRound(playerPlay(), computerPlay());
       } else if (round === maxRounds) {
         console.log("ready for another Game I see! Let's do this!!!");
         gameNum++;
         if (playerScore > computerScore) {
           gameWin++;
-          console.log("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!");
-          alert("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " times!")
+
+          console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+          console.log("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " Games!");
+          console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+          alert("Gongratz on the Win " + playerScore + " - " + computerScore + " You have won " + gameWin + "/" + gameNum + " Games!")
         } else {
-          console.log("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " times!");
-          alert("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " times!")
+          console.log("--------------------------------------------------------------------");
+          console.log("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " Games!");
+          console.log("--------------------------------------------------------------------");
+          alert("Sorry about the Loss buddy! " + playerScore + " - " + computerScore + " :( You have won " + gameWin + "/" + gameNum + " Games!")
         }
         playerScore = 0;
         computerScore = 0;
         round = 0;
         playRound(playerPlay(), computerPlay());
       } else {
-        console.log("New round!");
+        console.log("**** New round! ****");
         playRound(playerPlay(), computerPlay());
       }
     }
