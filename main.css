@@ -2,7 +2,7 @@ body {
   padding-top: 70px;
 }
 button {
-  margin-top: 5px;
+  margin-top: 25px;
 }
 @media (max-width: 480px) {
   body {
